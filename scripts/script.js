@@ -24,3 +24,29 @@ function sqrt(a) {
 
 	return Math.sqrt(a);
 }
+
+function operate (a,operator,b) {
+
+    switch (operator) {
+        
+        case '+':
+            return add(a,b);
+        break;
+
+        case '-':
+            return subtract(a,b);
+        break;
+
+        case '/':
+            return divide(a,b);
+        break;
+
+        case '*':
+            return multiply(a,b);
+        break;
+
+        case '':
+        break;
+    }
+
+}
