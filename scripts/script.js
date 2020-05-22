@@ -50,3 +50,15 @@ function operate (a,operator,b) {
     }
 
 }
+
+const allButtonsDiv = document.querySelector('.buttons');
+let buttonNumber;
+
+for (let i = 0; i < 10; i++) {                                                      //creating number buttons
+
+    buttonNumber = document.createElement('button');
+    buttonNumber.setAttribute('id', i);
+    buttonNumber.textContent = i;
+    buttonNumber.classList.add('numberButton');
+    allButtonsDiv.appendChild(buttonNumber);
+}
