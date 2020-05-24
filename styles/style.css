@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(235, 235, 235);
+    background-color: rgb(240, 240, 240);
 }
 
 .containerCalculator {
@@ -12,9 +12,9 @@ body {
     background-color: rgb(73, 76, 92);
     margin: 100px auto;
     width: 300px;
-    height: 320px;
+    height: 330px;
     grid-template-columns: 1fr 40px 1fr 40px 1fr 40px 1fr 40px 1fr 40px 1fr;
-    grid-template-rows: 15px 37px 0.8fr 40px 0.8fr 40px 0.8fr 40px 0.8fr 40px 0.8fr;
+    grid-template-rows: 15px 40px 0.8fr 40px 0.8fr 40px 0.8fr 40px 0.8fr 40px 0.8fr;
 }
 
 #num7 {
@@ -135,7 +135,7 @@ body {
     grid-column: 2 / 11;
     grid-row: 2 / 3;
     text-align: right;
-    line-height: 37px; 
+    line-height: 40px; 
     background-color: rgb(74, 145, 81);
     font-family: 'Orbitron', sans-serif;
     font-size: 25px;
