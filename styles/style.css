@@ -165,11 +165,7 @@ body {
 }
 
 .singleButton:active {
-    border-style: solid;
-    border-color: black;
-    border-width: 1px; 
-    opacity: 0.7;
-    transform: scale(0.975);
+    box-shadow: inset 1px 1px 3px;
 }
 
 .operationButton {
