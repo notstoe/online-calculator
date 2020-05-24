@@ -51,14 +51,14 @@ function operate (a,operator,b) {
 
 }
 
-const allButtonsDiv = document.querySelector('.buttons');
+const containerCalculator = document.querySelector('.containerCalculator');
 let buttonNumber;
 
 for (let i = 0; i < 10; i++) {                                                      //creating number buttons
 
     buttonNumber = document.createElement('button');
-    buttonNumber.setAttribute('id', i);
+    buttonNumber.setAttribute('id', `num${i}`);
     buttonNumber.textContent = i;
-    buttonNumber.classList.add('numberButton');
-    allButtonsDiv.appendChild(buttonNumber);
+    buttonNumber.classList.add('singleButton');
+    containerCalculator.appendChild(buttonNumber);
 }
