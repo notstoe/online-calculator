@@ -88,7 +88,7 @@ body {
 
 }
 
-#\\ {
+#\/ {
     grid-column: 8 / 9;
     grid-row: 4 / 5;
 }
@@ -113,7 +113,7 @@ body {
     grid-row: 4 / 5;
 }
 
-#sqrt {
+#sq {
     grid-column: 10 / 11;
     grid-row: 6 / 7;
 }
