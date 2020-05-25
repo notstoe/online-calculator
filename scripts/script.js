@@ -69,7 +69,7 @@ let pressedButton;
 let inputValues = [];
 let checkDisplayClear;
 let currentValue;
-let lastButtonPressed = '';
+let lastButtonPressed;
 
 function resetQueue() {
     inputValues = [];
@@ -142,8 +142,9 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
                     inputValues.push(currentValue);
 
                     checkDisplayClear = true;
-                    lastButtonPressed = 'equal';
                 }
+
+                lastButtonPressed = 'equal';
 
             break;
 
@@ -156,7 +157,7 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
                     resetQueue();
                 }
 
-            lastButtonPressed = 'clear';
+                lastButtonPressed = 'clear';
                 
             break;
         
@@ -167,36 +168,23 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
         switch (pressedButton[0]) {
             
             case '/':
-                
-                if (inputValues.length > 1) {
-                    if (inputValues[1] !== '/') inputValues[1] = '/';                   
-                }
-                
-            break;
-
             case '*':
-                
-                if (inputValues.length > 1) {
-                    if (inputValues[1] !== '*') inputValues[1] = '*';                   
-                }
-                
-            break;
-        
             case '+':
-                
-                if (inputValues.length > 1) {
-                    if (inputValues[1] !== '+') inputValues[1] = '+';                   
-                }
-                
-            break;
-
             case '-':
                 
                 if (inputValues.length > 1) {
-                    if (inputValues[1] !== '-') inputValues[1] = '-';                   
+                    if (inputValues[1] !== pressedButton[0]) inputValues[1] = pressedButton[0];                   
+                
+                } else if (display.textContent === '0') {
+                    
+                    inputValues.push(Number(display.textContent));
+                    inputValues.push(pressedButton[0]);
                 }
                 
+            lastButtonPressed = 'operator';
+
             break;
+
         }
     
     }   
