@@ -64,14 +64,19 @@ for (let i = 0; i < 10; i++) {                                                  
 }
 
 const display = document.querySelector('.display');
+const clearButton = document.querySelector('#C');
 let pressedButton;
 let inputValues = [];
 let checkDisplayClear;
 let currentValue;
 let lastButtonPressed = '';
 
+function resetQueue() {
+    inputValues = [];
+}
+
 function clearDisplay() {
-    display.textContent = '';
+    display.textContent = '0';
     checkDisplayClear = false;
 }
 
@@ -85,11 +90,14 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
         
         if (checkDisplayClear) clearDisplay();
 
+        if (display.textContent === '0') display.textContent = '';                      //overwriting zero from clear display
+
         display.textContent += pressedButton[3];     
-        lastButtonPressed = 'number';                                   
+        lastButtonPressed = 'number';
+        clearButton.textContent = 'C';                                   
     }
 
-    if (lastButtonPressed === 'number' || lastButtonPressed === 'equal') {
+    if (lastButtonPressed === 'number' || lastButtonPressed === 'equal' || lastButtonPressed === 'clear') {            
 
         switch (pressedButton[0]) {
             case '/':
@@ -101,7 +109,7 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
                     
                         inputValues.push(Number(display.textContent));
                         currentValue = operate(inputValues[0], inputValues[1], inputValues[2]);
-                        inputValues = [];                                                       //clears the queue
+                        resetQueue();                                                           
                         display.textContent = currentValue;
 
                         inputValues.push(currentValue);                                         //queues the result for next operation
@@ -127,8 +135,9 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
 
                     inputValues.push(Number(display.textContent));
                     currentValue = operate(inputValues[0], inputValues[1], inputValues[2]);
-                    inputValues = [];
+                    resetQueue();
                     display.textContent = currentValue;
+                    clearButton.textContent = 'CE';
 
                     inputValues.push(currentValue);
 
@@ -137,10 +146,23 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
                 }
 
             break;
+
+            case 'C':
+                if (lastButtonPressed !== 'equal') {                                        //if last pressed is number
+                    clearDisplay();
+
+                } else {                                                                    //if last pressed is equal
+                    clearDisplay();
+                    resetQueue();
+                }
+
+            lastButtonPressed = 'clear';
+                
+            break;
         
 
         } 
-    } else {
+    } else {                                                            //comes here only if lastPressedButton === 'operator'
 
         switch (pressedButton[0]) {
             
