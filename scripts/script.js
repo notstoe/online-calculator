@@ -111,6 +111,7 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
                         currentValue = operate(inputValues[0], inputValues[1], inputValues[2]);
                         resetQueue();                                                           
                         display.textContent = currentValue;
+                        clearButton.textContent = 'CE';
 
                         inputValues.push(currentValue);                                         //queues the result for next operation
                         inputValues.push(pressedButton[0]);                                     //queues the operation again    
@@ -163,7 +164,7 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
         
 
         } 
-    } else {                                                            //comes here only if lastPressedButton === 'operator'
+    } else {                                                            //comes here only if lastButtonPressed === 'operator'
 
         switch (pressedButton[0]) {
             
@@ -181,7 +182,16 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
                     inputValues.push(pressedButton[0]);
                 }
                 
-            lastButtonPressed = 'operator';
+                lastButtonPressed = 'operator';
+
+            break;
+
+            case 'C':
+            
+                clearDisplay();
+                resetQueue();
+
+                lastButtonPressed = 'clear';
 
             break;
 
