@@ -89,7 +89,7 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
         lastButtonPressed = 'number';                                   
     }
 
-    if (lastButtonPressed === 'number') {
+    if (lastButtonPressed === 'number' || lastButtonPressed === 'equal') {
 
         switch (pressedButton[0]) {
             case '/':
@@ -97,7 +97,7 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
             case '+':
             case '-':
 
-                if (inputValues.length == 2) {                                              //checks if there is already a number and an operation in queue        
+                if (inputValues.length == 2) {                                                  //checks if there is already a number and an operation in queue        
                     
                         inputValues.push(Number(display.textContent));
                         currentValue = operate(inputValues[0], inputValues[1], inputValues[2]);
@@ -107,12 +107,14 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
                         inputValues.push(currentValue);                                         //queues the result for next operation
                         inputValues.push(pressedButton[0]);                                     //queues the operation again    
 
-                } else {
+                } else if (lastButtonPressed === 'equal'){
 
-                    inputValues.push(Number(display.textContent));
                     inputValues.push(pressedButton[0]);
 
-                }
+                } else {
+                    
+                    inputValues.push(Number(display.textContent));
+                    inputValues.push(pressedButton[0]);}
 
                 checkDisplayClear = true;
                 lastButtonPressed = 'operator';
@@ -129,7 +131,9 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
                     display.textContent = currentValue;
 
                     inputValues.push(currentValue);
+
                     checkDisplayClear = true;
+                    lastButtonPressed = 'equal';
                 }
 
             break;
@@ -147,7 +151,30 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
                 }
                 
             break;
+
+            case '*':
+                
+                if (inputValues.length > 1) {
+                    if (inputValues[1] !== '*') inputValues[1] = '*';                   
+                }
+                
+            break;
         
+            case '+':
+                
+                if (inputValues.length > 1) {
+                    if (inputValues[1] !== '+') inputValues[1] = '+';                   
+                }
+                
+            break;
+
+            case '-':
+                
+                if (inputValues.length > 1) {
+                    if (inputValues[1] !== '-') inputValues[1] = '-';                   
+                }
+                
+            break;
         }
     
     }   
