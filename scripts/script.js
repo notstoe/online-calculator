@@ -172,6 +172,7 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
                     resetQueue();
                 }
 
+                clearButton.textContent = 'CE';
                 lastButtonPressed = 'clear';
                 
             break;
@@ -205,6 +206,7 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
                 clearDisplay();
                 resetQueue();
 
+                clearButton.textContent = 'CE';
                 lastButtonPressed = 'clear';
 
             break;
