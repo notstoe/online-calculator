@@ -109,12 +109,20 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
                     
                         inputValues.push(Number(display.textContent));
                         currentValue = operate(inputValues[0], inputValues[1], inputValues[2]);
-                        resetQueue();                                                           
                         display.textContent = currentValue;
                         clearButton.textContent = 'CE';
 
-                        inputValues.push(currentValue);                                         //queues the result for next operation
-                        inputValues.push(pressedButton[0]);                                     //queues the operation again    
+                        if (currentValue === 'Err0r') {                                         //checks if math function returns Err0r
+                            currentValue = 0;
+                            resetQueue();
+                        
+                        } else {
+
+                            resetQueue();                                                           
+
+                            inputValues.push(currentValue);                                     //queues the result for next operation
+                            inputValues.push(pressedButton[0]);                                 //queues the operation again    
+                        }
 
                 } else if (lastButtonPressed === 'equal'){
 
@@ -136,12 +144,18 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
 
                     inputValues.push(Number(display.textContent));
                     currentValue = operate(inputValues[0], inputValues[1], inputValues[2]);
-                    resetQueue();
                     display.textContent = currentValue;
                     clearButton.textContent = 'CE';
 
-                    inputValues.push(currentValue);
+                    if (currentValue === 'Err0r') {                                         //checks if math function returns Err0r
+                        currentValue = 0;
+                        resetQueue();
+                    
+                    } else {
 
+                        resetQueue();                                                           
+                        inputValues.push(currentValue);                                     //queues the result for next operation
+                    }
                     checkDisplayClear = true;
                 }
 
