@@ -167,7 +167,7 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
                 if (lastButtonPressed !== 'equal') {                                        //if last pressed is number
                     clearDisplay();
 
-                } else {                                                                    //if last pressed is equal
+                } else {                                                                    //if last pressed is equal or clear
                     clearDisplay();
                     resetQueue();
                 }
@@ -177,6 +177,27 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
                 
             break;
         
+            case 's':                                                                      //falls here when lastButtonPressed is number, equal or clear      
+
+                        resetQueue();                                                       //logic similar to equal but takes only 1 number to solve
+                        inputValues.push(Number(display.textContent));
+                        currentValue = sqrt(inputValues[0]);
+                        display.textContent = currentValue;
+                        clearButton.textContent = 'CE';
+
+                        if (currentValue === 'Err0r') {                                     //checks if math function returns Err0r
+                            currentValue = 0;
+                            resetQueue();
+                        
+                        } else {
+
+                            resetQueue();                                                           
+                            inputValues.push(currentValue);                                 //queues the result for next operation
+                        }
+                
+                checkDisplayClear = true;
+                lastButtonPressed = 'equal';                                                //same logic as equal just changes operation
+            break;
 
         } 
     } else {                                                            //comes here only if lastButtonPressed === 'operator'
@@ -208,6 +229,32 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
 
                 clearButton.textContent = 'CE';
                 lastButtonPressed = 'clear';
+
+            break;
+
+            case 's':
+            
+                if (inputValues.length > 1) {
+                        
+                        resetQueue();                                                       
+                        inputValues.push(Number(display.textContent));
+                        currentValue = sqrt(inputValues[0]);
+                        display.textContent = currentValue;
+                        clearButton.textContent = 'CE';
+
+                        if (currentValue === 'Err0r') {                                     //checks if math function returns Err0r
+                            currentValue = 0;
+                            resetQueue();
+                        
+                        } else {
+
+                            resetQueue();                                                           
+                            inputValues.push(currentValue);                                 //queues the result for next operation
+                        }
+                
+                checkDisplayClear = true;
+                lastButtonPressed = 'equal';
+                }    
 
             break;
 
