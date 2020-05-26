@@ -25,27 +25,28 @@ function sqrt(a) {
 	return Math.sqrt(a);
 }
 
-function operate (a,operator,b) {
+function operate (arr) {                                    //[number, operator(string), number]
 
-    switch (operator) {
+    switch (arr[1]) {
         
         case '+':
-            return add(a,b);
+            return add(arr[0],arr[2]);
         break;
 
         case '-':
-            return subtract(a,b);
+            return subtract(arr[0],arr[2]);
         break;
 
         case '/':
-            return divide(a,b);
+            return divide(arr[0],arr[2]);
         break;
 
         case '*':
-            return multiply(a,b);
+            return multiply(arr[0],arr[2]);
         break;
 
-        case '':
+        case 's':
+            return sqrt(arr[0]);
         break;
     }
 
@@ -108,7 +109,7 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
                 if (inputValues.length == 2) {                                                  //checks if there is already a number and an operation in queue        
                     
                         inputValues.push(Number(display.textContent));
-                        currentValue = operate(inputValues[0], inputValues[1], inputValues[2]);
+                        currentValue = operate(inputValues);
                         display.textContent = currentValue;
                         clearButton.textContent = 'CE';
 
@@ -143,7 +144,7 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
                 if (inputValues.length == 2) {                                  
 
                     inputValues.push(Number(display.textContent));
-                    currentValue = operate(inputValues[0], inputValues[1], inputValues[2]);
+                    currentValue = operate(inputValues);
                     display.textContent = currentValue;
                     clearButton.textContent = 'CE';
 
