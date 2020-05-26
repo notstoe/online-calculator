@@ -178,11 +178,12 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
                 
             break;
         
-            case 's':                                                                      //falls here when lastButtonPressed is number, equal or clear      
+            case 's':                                                                       //falls here when lastButtonPressed is number, equal or clear      
 
-                        resetQueue();                                                       //logic similar to equal but takes only 1 number to solve
+                        resetQueue();                                                       //logic similar to operator but takes only 1 number to solve
                         inputValues.push(Number(display.textContent));
-                        currentValue = sqrt(inputValues[0]);
+                        inputValues.push('s');
+                        currentValue = operate(inputValues);
                         display.textContent = currentValue;
                         clearButton.textContent = 'CE';
 
@@ -239,7 +240,8 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
                         
                         resetQueue();                                                       
                         inputValues.push(Number(display.textContent));
-                        currentValue = sqrt(inputValues[0]);
+                        inputValues.push('s');
+                        currentValue = operate(inputValues);
                         display.textContent = currentValue;
                         clearButton.textContent = 'CE';
 
@@ -254,7 +256,7 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
                         }
                 
                 checkDisplayClear = true;
-                lastButtonPressed = 'equal';
+                lastButtonPressed = 'equal';                                                //for code purpose, same logic as after equal is pressed
                 }    
 
             break;
