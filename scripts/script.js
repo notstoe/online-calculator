@@ -48,6 +48,10 @@ function operate (arr) {                                    //[number, operator(
         case 's':
             return sqrt(arr[0]);
         break;
+
+        case 'm':
+            return arr[0]*(-1);
+        break;
     }
 
 }
@@ -71,6 +75,7 @@ let inputValues = [];
 let checkDisplayClear;
 let currentValue;
 let lastButtonPressed;
+let temp;
 
 function resetQueue() {
     inputValues = [];
@@ -94,20 +99,13 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
         if (display.textContent === '0')  display.textContent = '';                     //overwriting zero from clear display
 
         display.textContent += pressedButton[3];     
-        lastButtonPressed = 'number';
+        
+            if (inputValues.length == 0) inputValues[0] = Number(display.textContent);
+
+            if (inputValues.length == 2) inputValues.push(Number(display.textContent));
+        
         clearButton.textContent = 'C';                                   
     }
-
-    if (pressedButton[0] === 'm') {
-
-        display.textContent = Number(display.textContent)*(-1);
-
-        if (display.textContent !== '0') clearButton.textContent = 'C';
-        
-        lastButtonPressed = 'number';                                                   //for code purpose, same logic as after number is pressed
-    }
-
-    if (lastButtonPressed === 'number' || lastButtonPressed === 'equal' || lastButtonPressed === 'clear') {            
 
         switch (pressedButton[0]) {
             case '/':
@@ -115,9 +113,8 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
             case '+':
             case '-':
 
-                if (inputValues.length == 2) {                                                  //checks if there is already a number and an operation in queue        
+                if (inputValues.length == 3) {                                                  //checks if there is already a number and an operation in queue        
                     
-                        inputValues.push(Number(display.textContent));
                         currentValue = operate(inputValues);
                         display.textContent = currentValue;
                         clearButton.textContent = 'CE';
@@ -134,25 +131,28 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
                             inputValues.push(pressedButton[0]);                                 //queues the operation again    
                         }
 
-                } else if (lastButtonPressed === 'equal'){
+                } else if (inputValues.length == 2){
+
+                    inputValues[1] = pressedButton[0];
+
+                } else if (inputValues.length == 1){
 
                     inputValues.push(pressedButton[0]);
 
-                } else {
-                    
+                } else {                                                                        //after a resetQueue for instance
+
                     inputValues.push(Number(display.textContent));
-                    inputValues.push(pressedButton[0]);}
+                    inputValues.push(pressedButton[0]);
+                }
 
                 checkDisplayClear = true;
-                lastButtonPressed = 'operator';
 
             break;
 
             case '=':                                                                       //follows the same logic but doesnt queue operation, just the result
 
-                if (inputValues.length == 2) {                                  
+                if (inputValues.length == 3) {                                  
 
-                    inputValues.push(Number(display.textContent));
                     currentValue = operate(inputValues);
                     display.textContent = currentValue;
                     clearButton.textContent = 'CE';
@@ -169,32 +169,34 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
                     checkDisplayClear = true;
                 }
 
-                lastButtonPressed = 'equal';
-
             break;
 
             case 'C':
-                if (lastButtonPressed !== 'equal') {                                        //if last pressed is number
+                if (inputValues.length == 3) {                                               //num, operation and num in queue
+                    
                     clearDisplay();
+                    inputValues[2] = 0;
 
-                } else {                                                                    //if last pressed is equal or clear
+                } else {                                                                     //1 number || 1 number and operation
+                    resetQueue();                                             
                     clearDisplay();
-                    resetQueue();
                 }
-
-                clearButton.textContent = 'CE';
-                lastButtonPressed = 'clear';
                 
+                clearButton.textContent = 'CE';
+
             break;
         
-            case 's':                                                                       //falls here when lastButtonPressed is number, equal or clear      
+            case 's':                                                                       
+              
+                if (inputValues.length == 1 || inputValues.length == 2) {              //logic similar to operator but takes only 1 number to solve
+                   
+                    if (inputValues.length == 2) inputValues[1] = pressedButton[0];
 
-                        resetQueue();                                                       //logic similar to operator but takes only 1 number to solve
-                        inputValues.push(Number(display.textContent));
-                        inputValues.push('s');
-                        currentValue = operate(inputValues);
-                        display.textContent = currentValue;
-                        clearButton.textContent = 'CE';
+                    if (inputValues.length == 1) inputValues.push(pressedButton[0]);
+
+                    currentValue = operate(inputValues);
+                    display.textContent = currentValue;
+                    clearButton.textContent = 'CE';
 
                         if (currentValue === 'Err0r') {                                     //checks if math function returns Err0r
                             currentValue = 0;
@@ -206,14 +208,27 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
                             inputValues.push(currentValue);                                 //queues the result for next operation
                         }
                 
-                checkDisplayClear = true;
-                lastButtonPressed = 'equal';                                                //same logic as equal just changes operation
-            break;
-        } 
-    } else {                                                            //comes here only if lastButtonPressed === 'operator'
+                }
 
-        switch (pressedButton[0]) {
+                checkDisplayClear = true;
+                
+            break;
+
+            case 'm':
             
+                if (lastButtonPressed === 'equal' || lastButtonPressed === 'plusminus') {
+
+                    resetQueue();
+                    inputValues[0] = Number(display.textContent)*(-1);                      //queues new value
+                    display.textContent = inputValues[0];
+
+                }
+
+            lastButtonPressed = 'plusminus';
+
+            break;
+            
+            /* 
             case '/':
             case '*':
             case '+':
@@ -269,8 +284,9 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
 
             break;
 
-        }
-    
-    }   
+            case '=':
+                return;
+            break; */
+        }   
 }));
 
