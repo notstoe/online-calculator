@@ -91,11 +91,20 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
         
         if (checkDisplayClear) clearDisplay();
 
-        if (display.textContent === '0') display.textContent = '';                      //overwriting zero from clear display
+        if (display.textContent === '0')  display.textContent = '';                     //overwriting zero from clear display
 
         display.textContent += pressedButton[3];     
         lastButtonPressed = 'number';
         clearButton.textContent = 'C';                                   
+    }
+
+    if (pressedButton[0] === 'm') {
+
+        display.textContent = Number(display.textContent)*(-1);
+
+        if (display.textContent !== '0') clearButton.textContent = 'C';
+        
+        lastButtonPressed = 'number';                                                   //for code purpose, same logic as after number is pressed
     }
 
     if (lastButtonPressed === 'number' || lastButtonPressed === 'equal' || lastButtonPressed === 'clear') {            
@@ -200,7 +209,6 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
                 checkDisplayClear = true;
                 lastButtonPressed = 'equal';                                                //same logic as equal just changes operation
             break;
-
         } 
     } else {                                                            //comes here only if lastButtonPressed === 'operator'
 
