@@ -77,13 +77,13 @@ body {
     background-color: rgb(197, 197, 209);
 }
 
-#\+\/- {
+#m {
     grid-column: -7 / -6;
     grid-row: 10 / 11;
     background-color: rgb(21, 22, 26);
 }
 
-#\+\/-:hover {
+#m:hover {
     background-color: rgb(197, 197, 209);
 
 }
