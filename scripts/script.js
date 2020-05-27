@@ -102,57 +102,19 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
         
             if (inputValues.length == 0) inputValues[0] = Number(display.textContent);
 
-            if (inputValues.length == 2) inputValues.push(Number(display.textContent));
+            if (inputValues.length == 2) inputValues[2] = Number(display.textContent);
         
         clearButton.textContent = 'C';                                   
     }
 
-        switch (pressedButton[0]) {
-            case '/':
-            case '*':
-            case '+':
-            case '-':
+    switch (pressedButton[0]) {
+        case '/':
+        case '*':
+        case '+':
+        case '-':
 
-                if (inputValues.length == 3) {                                                  //checks if there is already a number and an operation in queue        
-                    
-                        currentValue = operate(inputValues);
-                        display.textContent = currentValue;
-                        clearButton.textContent = 'CE';
-
-                        if (currentValue === 'Err0r') {                                         //checks if math function returns Err0r
-                            currentValue = 0;
-                            resetQueue();
-                        
-                        } else {
-
-                            resetQueue();                                                           
-
-                            inputValues.push(currentValue);                                     //queues the result for next operation
-                            inputValues.push(pressedButton[0]);                                 //queues the operation again    
-                        }
-
-                } else if (inputValues.length == 2){
-
-                    inputValues[1] = pressedButton[0];
-
-                } else if (inputValues.length == 1){
-
-                    inputValues.push(pressedButton[0]);
-
-                } else {                                                                        //after a resetQueue for instance
-
-                    inputValues.push(Number(display.textContent));
-                    inputValues.push(pressedButton[0]);
-                }
-
-                checkDisplayClear = true;
-
-            break;
-
-            case '=':                                                                       //follows the same logic but doesnt queue operation, just the result
-
-                if (inputValues.length == 3) {                                  
-
+            if (inputValues.length == 3) {                                                  //checks if there is already a number and an operation in queue        
+                
                     currentValue = operate(inputValues);
                     display.textContent = currentValue;
                     clearButton.textContent = 'CE';
@@ -164,129 +126,108 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
                     } else {
 
                         resetQueue();                                                           
+
                         inputValues.push(currentValue);                                     //queues the result for next operation
+                        inputValues.push(pressedButton[0]);                                 //queues the operation again    
                     }
-                    checkDisplayClear = true;
-                }
 
-            break;
+            } else if (inputValues.length == 2){
 
-            case 'C':
-                if (inputValues.length == 3) {                                               //num, operation and num in queue
-                    
-                    clearDisplay();
-                    inputValues[2] = 0;
+                inputValues[1] = pressedButton[0];
 
-                } else {                                                                     //1 number || 1 number and operation
-                    resetQueue();                                             
-                    clearDisplay();
-                }
-                
+            } else if (inputValues.length == 1){
+
+                inputValues.push(pressedButton[0]);
+
+            } else {                                                                        //after a resetQueue for instance
+
+                inputValues.push(Number(display.textContent));
+                inputValues.push(pressedButton[0]);
+            }
+
+            checkDisplayClear = true;
+
+        break;
+
+        case '=':                                                                       //follows the same logic but doesnt queue operation, just the result
+
+            if (inputValues.length == 3) {                                  
+
+                currentValue = operate(inputValues);
+                display.textContent = currentValue;
                 clearButton.textContent = 'CE';
 
-            break;
-        
-            case 's':                                                                       
-              
-                if (inputValues.length == 1 || inputValues.length == 2) {              //logic similar to operator but takes only 1 number to solve
-                   
-                    if (inputValues.length == 2) inputValues[1] = pressedButton[0];
-
-                    if (inputValues.length == 1) inputValues.push(pressedButton[0]);
-
-                    currentValue = operate(inputValues);
-                    display.textContent = currentValue;
-                    clearButton.textContent = 'CE';
-
-                        if (currentValue === 'Err0r') {                                     //checks if math function returns Err0r
-                            currentValue = 0;
-                            resetQueue();
-                        
-                        } else {
-
-                            resetQueue();                                                           
-                            inputValues.push(currentValue);                                 //queues the result for next operation
-                        }
-                
-                }
-
-                checkDisplayClear = true;
-                
-            break;
-
-            case 'm':
-            
-                if (lastButtonPressed === 'equal' || lastButtonPressed === 'plusminus') {
-
+                if (currentValue === 'Err0r') {                                         //checks if math function returns Err0r
+                    currentValue = 0;
                     resetQueue();
-                    inputValues[0] = Number(display.textContent)*(-1);                      //queues new value
-                    display.textContent = inputValues[0];
+                
+                } else {
 
+                    resetQueue();                                                           
+                    inputValues.push(currentValue);                                     //queues the result for next operation
                 }
-
-            lastButtonPressed = 'plusminus';
-
-            break;
-            
-            /* 
-            case '/':
-            case '*':
-            case '+':
-            case '-':
-                
-                if (inputValues.length > 1) {
-                    if (inputValues[1] !== pressedButton[0]) inputValues[1] = pressedButton[0];                   
-                
-                } else if (display.textContent === '0') {
-                    
-                    inputValues.push(Number(display.textContent));
-                    inputValues.push(pressedButton[0]);
-                }
-                
-                lastButtonPressed = 'operator';
-
-            break;
-
-            case 'C':
-            
-                clearDisplay();
-                resetQueue();
-
-                clearButton.textContent = 'CE';
-                lastButtonPressed = 'clear';
-
-            break;
-
-            case 's':
-            
-                if (inputValues.length > 1) {
-                        
-                        resetQueue();                                                       
-                        inputValues.push(Number(display.textContent));
-                        inputValues.push('s');
-                        currentValue = operate(inputValues);
-                        display.textContent = currentValue;
-                        clearButton.textContent = 'CE';
-
-                        if (currentValue === 'Err0r') {                                     //checks if math function returns Err0r
-                            currentValue = 0;
-                            resetQueue();
-                        
-                        } else {
-
-                            resetQueue();                                                           
-                            inputValues.push(currentValue);                                 //queues the result for next operation
-                        }
-                
                 checkDisplayClear = true;
-                lastButtonPressed = 'equal';                                                //for code purpose, same logic as after equal is pressed
-                }    
+            }
 
-            break;
+        break;
 
-            case '=':
-                return;
-            break; */
-        }   
+        case 'C':
+            if (inputValues.length == 3) {                                               //num, operation and num in queue
+                
+                clearDisplay();
+                inputValues[2] = 0;
+
+            } else {                                                                     //1 number || 1 number and operation
+                resetQueue();                                             
+                clearDisplay();
+            }
+            
+            clearButton.textContent = 'CE';
+
+        break;
+    
+        case 's':                                                                       
+            
+            if (inputValues.length == 1 || inputValues.length == 2) {              //logic similar to operator but takes only 1 number to solve
+                
+                if (inputValues.length == 2) inputValues[1] = pressedButton[0];
+
+                if (inputValues.length == 1) inputValues.push(pressedButton[0]);
+
+                currentValue = operate(inputValues);
+                display.textContent = currentValue;
+                clearButton.textContent = 'CE';
+
+                    if (currentValue === 'Err0r') {                                     //checks if math function returns Err0r
+                        currentValue = 0;
+                        resetQueue();
+                    
+                    } else {
+
+                        resetQueue();                                                           
+                        inputValues.push(currentValue);                                 //queues the result for next operation
+                    }
+            
+            }
+
+            checkDisplayClear = true;
+
+        break;
+
+        case 'm':
+        
+            if (inputValues.length == 3) {                                              //changes the signal of last number on queue
+
+                inputValues[2] = inputValues[2]*(-1);
+                display.textContent = inputValues[2];
+            }
+            if (inputValues.length == 2 || inputValues.length == 1) {
+
+                inputValues[0] = inputValues[0]*(-1);
+                display.textContent = inputValues[0];
+            }
+
+        break;  
+    }   
 }));
 
