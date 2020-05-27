@@ -70,11 +70,11 @@ for (let i = 0; i < 10; i++) {                                                  
 
 const display = document.querySelector('.display');
 const clearButton = document.querySelector('#C');
+
 let pressedButton;
 let inputValues = [];
 let checkDisplayClear;
 let currentValue;
-let lastButtonPressed;
 let temp;
 
 function resetQueue() {
@@ -84,7 +84,7 @@ function resetQueue() {
 function clearDisplay() {
     display.textContent = '0';
     checkDisplayClear = false;
-}
+}                        
 
 const buttons = document.querySelectorAll('.singleButton');
 buttons.forEach(button => button.addEventListener('click', (e) => {
@@ -227,7 +227,25 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
                 display.textContent = inputValues[0];
             }
 
-        break;  
+        break;
+        
+        case '.':
+
+            if (inputValues.length > 0) {
+
+                if (display.textContent.indexOf('.') < 0)  {                            //checks for dot on display (last number queued)
+
+                    display.textContent += '.';
+                    resetQueue();  
+                }             
+            }
+
+            if (inputValues.length == 0) {
+
+                if (display.textContent.indexOf('.') < 0)    display.textContent = '0.';
+            }    
+
+        break;
     }   
 }));
 
