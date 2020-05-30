@@ -100,12 +100,26 @@ function isThereADot(str) {                                                     
 }
 
 const buttons = document.querySelectorAll('.singleButton');
-buttons.forEach(button => button.addEventListener('click', calculatorFunction));
+buttons.forEach(button => button.addEventListener('click', selectedButton));
 
-function calculatorFunction(e) {
-    
-    pressedButton = Array.from(e.target.id);                                            //gets array from id of element clicked to determine action
+window.addEventListener('keydown', selectedButton);
 
+function selectedButton(e) {
+
+    let buttonKey = document.querySelector(`button[data-key="${e.keyCode}"]`);
+    // let buttonKey2 = document.querySelector(`button[numpad-key="${e.keyCode}"]`);
+
+    // console.log(buttonKey2);
+    if (!buttonKey) {
+        pressedButton = Array.from(e.target.id);
+
+    } else {
+        pressedButton = Array.from(buttonKey.id); }
+
+    calculatorFunction();                                                               //gets array from id of element clicked to determine action
+}
+
+function calculatorFunction() {                                           
 
     if (pressedButton.length == 4) {                                                    //checks if pressedButton is a number (id == numX)
         
