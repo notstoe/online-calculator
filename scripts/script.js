@@ -76,18 +76,6 @@ function operate (arr) {                                                        
     }
 }
 
-const containerCalculator = document.querySelector('.containerCalculator');
-let buttonNumber;
-
-for (let i = 0; i < 10; i++) {                                                      //creating number buttons
-
-    buttonNumber = document.createElement('button');
-    buttonNumber.setAttribute('id', `num${i}`);
-    buttonNumber.textContent = i;
-    buttonNumber.classList.add('singleButton');
-    containerCalculator.appendChild(buttonNumber);
-}
-
 const display = document.querySelector('.display');
 const clearButton = document.querySelector('#C');
 
@@ -112,7 +100,9 @@ function isThereADot(str) {                                                     
 }
 
 const buttons = document.querySelectorAll('.singleButton');
-buttons.forEach(button => button.addEventListener('click', (e) => {
+buttons.forEach(button => button.addEventListener('click', calculatorFunction));
+
+function calculatorFunction(e) {
     
     pressedButton = Array.from(e.target.id);                                            //gets array from id of element clicked to determine action
 
@@ -299,5 +289,4 @@ buttons.forEach(button => button.addEventListener('click', (e) => {
 
         break;
     }   
-}));
-
+}   
