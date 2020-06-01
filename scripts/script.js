@@ -99,24 +99,84 @@ function isThereADot(str) {                                                     
     return str.indexOf('.') < 0 ? false : true;
 }
 
+function removeTransition(e) {
+    if (e.propertyName !== 'transform') return;
+    e.target.classList.remove('keyboardPress');
+}
+
 const buttons = document.querySelectorAll('.singleButton');
 buttons.forEach(button => button.addEventListener('click', selectedButton));
+buttons.forEach(button => button.addEventListener('transitionend', removeTransition));
 
 window.addEventListener('keydown', selectedButton);
 
-function selectedButton(e) {
+function removeTransition(e) {
 
-    let buttonKey = document.querySelector(`button[data-key="${e.keyCode}"]`);
-    // let buttonKey2 = document.querySelector(`button[numpad-key="${e.keyCode}"]`);
+     if (e.propertyName !== 'box-shadow') return;
 
-    // console.log(buttonKey2);
-    if (!buttonKey) {
-        pressedButton = Array.from(e.target.id);
+     if (e.target.id === '=') {
+
+        this.classList.remove('equalButtonPress');
+        this.classList.add('equalButton');
 
     } else {
-        pressedButton = Array.from(buttonKey.id); }
+     
+        this.classList.remove('keyboardPress');
 
-    calculatorFunction();                                                               //gets array from id of element clicked to determine action
+        if (pressedButton.length != 4) this.classList.add('operationButton');
+
+        if (this.id === '.' || this.id === 'm') this.classList.add('numberModifier');
+    }
+}
+
+function selectedButton(e) {
+
+    let buttonKey1 = document.querySelector(`button[data-key="${e.keyCode}"]`);
+    let buttonKey2 = document.querySelector(`button[numpad-key="${e.keyCode}"]`);
+
+    if (buttonKey1) { 
+        
+        pressedButton = Array.from(buttonKey1.id); 
+        
+        if (buttonKey1.id === '=') {
+
+            buttonKey1.classList.add('equalButtonPress');
+            buttonKey1.classList.remove('equalButton');
+
+        } else {
+
+            buttonKey1.classList.add('keyboardPress');
+
+            if (pressedButton.length != 4) buttonKey1.classList.remove('operationButton');
+
+            if (buttonKey1.id === '.' || buttonKey1.id === 'm') buttonKey1.classList.remove('numberModifier');
+        }
+    
+    } else if (buttonKey2) {
+        
+        pressedButton = Array.from(buttonKey2.id);
+
+        if (buttonKey1.id === '=') {
+
+            buttonKey1.classList.add('equalButtonPress');
+            buttonKey1.classList.remove('equalButton');
+
+        } else {
+
+            buttonKey1.classList.add('keyboardPress');
+
+        if (pressedButton.length != 4) buttonKey2.classList.remove('operationButton');
+        
+        if (buttonKey2.id === '.' || buttonKey2.id === 'm') buttonKey2.classList.remove('numberModifier');
+
+        }
+
+    } else { 
+
+        pressedButton = Array.from(e.target.id); 
+    }
+
+    calculatorFunction();                                                                       //gets array from id of element clicked to determine action
 }
 
 function calculatorFunction() {                                           
