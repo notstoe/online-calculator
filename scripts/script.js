@@ -361,3 +361,60 @@ function calculatorFunction(pressedButton) {                                    
         break;
     }   
 }   
+
+
+const help = document.querySelector('#help');
+help.addEventListener('click', createHelpContent);
+
+function createHelpContent(e) {
+    
+    const body = document.querySelector('body');
+    const isThereContent = document.querySelector('.helpContent');
+
+    if (isThereContent) {
+
+        body.removeChild(isThereContent);
+
+    } else {
+
+        const bodyLastChild = body.lastChild;
+
+        const helpContent = document.createElement('ul');
+        helpContent.textContent = 'You can also try using your Keyboard or Numpad:';
+        helpContent.classList.add('helpContent');
+
+            const addition = document.createElement('li');
+            addition.textContent = 'Press \"\+\" for addition';
+            helpContent.appendChild(addition);
+
+            const subtraction = document.createElement('li');
+            subtraction.textContent = 'Press \"\-\" for subtraction';
+            helpContent.appendChild(subtraction);
+
+            const multiplication = document.createElement('li');
+            multiplication.textContent = 'Press \"x\" for multiplication';
+            helpContent.appendChild(multiplication);
+
+            const division = document.createElement('li');
+            division.textContent = 'Press \"\/\" for division';
+            helpContent.appendChild(division);
+
+            const sqrt = document.createElement('li');
+            sqrt.textContent = 'Press \"s\" for square-root';
+            helpContent.appendChild(sqrt);
+
+            const changeSign = document.createElement('li');
+            changeSign.textContent = 'Press \"m\" for changing signal';
+            helpContent.appendChild(changeSign);
+
+            const clear = document.createElement('li');
+            clear.textContent = 'Press \"backspace\" to clear (if the button\'s showing \"C\", it\'ll correct just the last number entered!)';
+            helpContent.appendChild(clear);
+
+            const equal = document.createElement('li');
+            equal.textContent = 'Press \"enter\" to solve';
+            helpContent.appendChild(equal);
+
+        body.insertBefore(helpContent, bodyLastChild);
+    }
+}

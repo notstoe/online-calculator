@@ -10,7 +10,7 @@ body {
     border-width: 1px;
     box-shadow: 4px 7px;
     background-color: rgb(73, 76, 92);
-    margin: 90px auto;
+    margin: 80px auto;
     width: 300px;
     height: 330px;
     grid-template-columns: 1fr 40px 1fr 40px 1fr 40px 1fr 40px 1fr 40px 1fr;
@@ -183,7 +183,6 @@ body {
 #github{
     width: 50px;
     margin-left: 6px;
-    margin-top: 10px;
 }
 
 .pageTitle {
@@ -210,4 +209,43 @@ body {
     color: black;
     box-shadow: inset 1px 1px 3px;
     background-color: rgb(255, 180, 118);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+#help {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 18px;
+    margin-top: 5px;
+    margin-right: 20px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#help:hover {
+    color: blue;
+}
+
+#help:active {
+    text-decoration: underline;
+}
+
+.helpContent {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 22px;
+    text-align: left;
+    margin-bottom: 50px;
+    margin-top: -5px;
+    margin-left: 25px;
+}
+
+li {
+    font-size: 16px;
+    list-style-type: disc;
+    padding: 16px 10px 0px 0px;
+    margin-left: 22px;
 }
