@@ -153,14 +153,14 @@ function selectedButton(e) {
 
     } else if (buttonKey2) {
 
-        if (buttonKey1.id === '=') {
+        if (buttonKey2.id === '=') {
 
-            buttonKey1.classList.add('equalButtonPress');
-            buttonKey1.classList.remove('equalButton');
+            buttonKey2.classList.add('equalButtonPress');
+            buttonKey2.classList.remove('equalButton');
 
         } else {
 
-            buttonKey1.classList.add('keyboardPress');
+            buttonKey2.classList.add('keyboardPress');
 
             if (Array.from(buttonKey2.id).length != 4) buttonKey2.classList.remove('operationButton');
         
