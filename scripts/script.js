@@ -79,7 +79,6 @@ function operate (arr) {                                                        
 const display = document.querySelector('.display');
 const clearButton = document.querySelector('#C');
 
-let pressedButton;
 let inputValues = [];
 let checkDisplayClear;
 let currentValue;
@@ -114,7 +113,7 @@ function removeTransition(e) {
 
      if (e.propertyName !== 'box-shadow') return;
 
-     if (e.target.id === '=') {
+     if (e.target.id === '=') {                                                                             //different class transition if its the equal button (different color)
 
         this.classList.remove('equalButtonPress');
         this.classList.add('equalButton');
@@ -123,9 +122,9 @@ function removeTransition(e) {
      
         this.classList.remove('keyboardPress');
 
-        if (pressedButton.length != 4) this.classList.add('operationButton');
+        if (Array.from(this.id).length != 4) this.classList.add('operationButton');                              //checks if its not a number
 
-        if (this.id === '.' || this.id === 'm') this.classList.add('numberModifier');
+        if (this.id === '.' || this.id === 'm') this.classList.add('numberModifier');                            //checks if it is a special operation that has the same color of the numbers
     }
 }
 
@@ -136,8 +135,6 @@ function selectedButton(e) {
 
     if (buttonKey1) { 
         
-        pressedButton = Array.from(buttonKey1.id); 
-        
         if (buttonKey1.id === '=') {
 
             buttonKey1.classList.add('equalButtonPress');
@@ -147,14 +144,14 @@ function selectedButton(e) {
 
             buttonKey1.classList.add('keyboardPress');
 
-            if (pressedButton.length != 4) buttonKey1.classList.remove('operationButton');
+            if (Array.from(buttonKey1.id).length != 4) buttonKey1.classList.remove('operationButton');
 
             if (buttonKey1.id === '.' || buttonKey1.id === 'm') buttonKey1.classList.remove('numberModifier');
         }
-    
+
+        calculatorFunction(Array.from(buttonKey1.id));
+
     } else if (buttonKey2) {
-        
-        pressedButton = Array.from(buttonKey2.id);
 
         if (buttonKey1.id === '=') {
 
@@ -165,21 +162,21 @@ function selectedButton(e) {
 
             buttonKey1.classList.add('keyboardPress');
 
-        if (pressedButton.length != 4) buttonKey2.classList.remove('operationButton');
+            if (Array.from(buttonKey2.id).length != 4) buttonKey2.classList.remove('operationButton');
         
-        if (buttonKey2.id === '.' || buttonKey2.id === 'm') buttonKey2.classList.remove('numberModifier');
+            if (buttonKey2.id === '.' || buttonKey2.id === 'm') buttonKey2.classList.remove('numberModifier');
 
         }
+        
+        calculatorFunction(Array.from(buttonKey2.id));
 
     } else { 
 
-        pressedButton = Array.from(e.target.id); 
-    }
-
-    calculatorFunction();                                                                       //gets array from id of element clicked to determine action
+        calculatorFunction(Array.from(e.target.id)); 
+    }                                                                       
 }
 
-function calculatorFunction() {                                           
+function calculatorFunction(pressedButton) {                                            //array from id of element clicked determines action           
 
     if (pressedButton.length == 4) {                                                    //checks if pressedButton is a number (id == numX)
         
