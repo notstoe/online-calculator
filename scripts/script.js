@@ -408,7 +408,7 @@ function createHelpContent(e) {
             helpContent.appendChild(changeSign);
 
             const clear = document.createElement('li');
-            clear.textContent = 'Press \"backspace\" to clear (if the button\'s showing \"C\", it\'ll correct just the last number entered!)';
+            clear.textContent = 'Press \"backspace\" or \"c\" to clear (if the button\'s showing \"C\", it\'ll correct just the last number entered!)';
             helpContent.appendChild(clear);
 
             const equal = document.createElement('li');
