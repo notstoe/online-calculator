@@ -83,6 +83,7 @@ let inputValues = [];
 let checkDisplayClear;
 let currentValue;
 let replacedNumber;
+let index;
 
 function resetQueue() {
     inputValues = [];
@@ -243,7 +244,7 @@ function calculatorFunction(pressedButton) {                                    
 
                 inputValues.push(pressedButton[0]);
 
-            } else {                                                                        //after a resetQueue for instance
+            } else if (display.textContent !== 'Err0r') {                                   //doesnt queue if theres an error on screen
 
                 inputValues.push(Number(display.textContent));
                 inputValues.push(pressedButton[0]);
@@ -333,16 +334,23 @@ function calculatorFunction(pressedButton) {                                    
         break;
 
         case 'm':
-        
-            let index;
 
             if (inputValues.length == 3) index = 2;                            
 
             if (inputValues.length == 2 || inputValues.length == 1) index = 0; 
 
             inputValues[index] = inputValues[index]*(-1);                                             //changes the signal of last number on queue
-                
+
+            if (Number.isNaN(inputValues[index])) {                                                          //checks if it returned NaN
+                resetQueue();
+                clearDisplay();
+                clearButton.textContent = 'CE';
+                display.textContent = 'Err0r';
+
+            } else {
+
             numDigits(inputValues[index]) > 12 ? display.textContent = inputValues[index].toExponential(2) : display.textContent = inputValues[index];         //transforms big numbers into exponential form, so it doenst leak in the display
+            }
 
         break;
         
