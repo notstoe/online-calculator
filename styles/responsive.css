@@ -1,13 +1,13 @@
 @media (max-width: 700px) {
 
   .pageTitle {
-    font-size: 29px;
+    font-size: 8vw;
     text-align: center;
     width: 100%;
   }
   
   .credits {
-    font-size: 13px;
+    font-size: 4vw;
     text-align: center;
     width: 100%;
   }
@@ -26,23 +26,26 @@
     height: 113px;
   }
   #github {
-    width: 30%;
-    height: 30%;
+    width: 9vw;
+    height: 9vw;
   }
   
   .header {
     margin-top: 10px;
-    padding-bottom: 45px;
+    padding-bottom: 43px;
   }
   
   .header #help {
     align-self: center;
-    font-size: 17px;
+    font-size: 4vw;
   }
   
   body .helpContent {
-    font-size: 17px;
+    font-size: 4vw;
     margin-top: -30px;
     margin-left: 12px;
+  }
+  li {
+    font-size: 4vw;
   }
 }
