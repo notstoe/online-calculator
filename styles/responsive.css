@@ -1,0 +1,37 @@
+@media (max-width: 600px) {
+
+  .pageTitle {
+    font-size: 29px;
+    text-align: center;
+    
+  }
+  
+  .credits {
+    font-size: 13px;
+    text-align: center;
+  }
+  
+  .containerCalculator {
+    margin-top: 30px;
+  }
+
+  #github {
+    width: 30%;
+    height: 30%;
+  }
+  
+  .header {
+    margin-top: 10px;
+    padding-bottom: 45px;
+  }
+  
+  .header #help {
+    align-self: center;
+    font-size: 17px;
+  }
+  
+  body .helpContent {
+    font-size: 17px;
+    margin-top: -30px;
+  }
+}
