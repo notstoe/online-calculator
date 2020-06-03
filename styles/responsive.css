@@ -3,13 +3,13 @@
   .pageTitle {
     font-size: 29px;
     text-align: center;
-    width: auto;
+    width: 100%;
   }
   
   .credits {
     font-size: 13px;
     text-align: center;
-    width: auto;
+    width: 100%;
   }
   
   .containerCalculator {
