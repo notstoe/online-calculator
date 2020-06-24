@@ -180,11 +180,6 @@ body {
     background-color: rgb(21, 22, 26);
 }
 
-#github{
-    width: 50px;
-    margin-left: 6px;
-}
-
 .pageTitle {
     font-family: 'Orbitron', sans-serif;
     margin: -28px auto;
@@ -241,6 +236,12 @@ header {
     margin-bottom: 50px;
     margin-top: -5px;
     margin-left: 25px;
+}
+
+
+#github{
+    width: 50px;
+    margin-left: 6px;
 }
 
 li {
