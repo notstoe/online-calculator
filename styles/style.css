@@ -8,6 +8,7 @@ body {
     border-radius: 15px;
     border-style: solid;
     border-width: 1px;
+    border-color: rgb(73, 76, 92);
     box-shadow: 4px 7px;
     background-color: rgb(73, 76, 92);
     margin: 80px auto;
